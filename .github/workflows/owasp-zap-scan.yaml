@@ -1,21 +1,15 @@
 name: owasp-zap-scan
 env:
-  ZAP_SCAN_TYPE: base
+  ZAP_SCAN_TYPE: full
   # Check dev environment for now
-  ZAP_TARGET_URL: https://chefs-dev.apps.silver.devops.gov.bc.ca/pr-${{ github.event.number }}
+  ZAP_TARGET_URL: https://chefs-dev.apps.silver.devops.gov.bc.ca/app/
   ZAP_DURATION: 2
   ZAP_MAX_DURATION: 10
   # PUBLISH RESULTS TO WEBPAGE
   ## Creates a pre-signed URL with the results...
   ZAP_GCP_PUBLISH: false
 on:
-  pull_request:
-    branches:
-      - master
-    types:
-      - opened
-      - reopened
-      - synchronize
+  workflow_dispatch:
   workflow_call:
     inputs:
       ZAP_SCAN_TYPE:
